@@ -13,7 +13,9 @@ const PORT = process.env.PORT || 5353;
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
-
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
 // MongoDB Connection
 mongoose
   .connect(process.env.MONGO_URI)
