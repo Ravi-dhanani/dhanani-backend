@@ -49,6 +49,20 @@ router.put("/:id", auth, async (req, res) => {
   }
 });
 
+router.get("/:id", auth, async (req, res) => {
+  try {
+    const merchant = await Merchant.findById(req.params.id);
+
+    if (!merchant) {
+      return res.status(404).json({ error: "Merchant not found" });
+    }
+
+    res.json(merchant);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 router.delete("/:id", auth, async (req, res) => {
   try {
     const stocks = await Stock.find({ merchant: req.params.id });
